@@ -1,0 +1,32 @@
+EL (Expression Language :표현언어)
+
+- 스크립트 요소를 통해 기본문법을 보완하는 역활을 한다.
+
+- JSO2.0 부터 적용.
+
+- java 코드를 사용했던 곳에는 모두 사용 가능
+
+- 사용법 : ${ 문자, 연산자 }
+ 
+  문자 : 논리형(True, False),숫자,문자열, null
+  연산자:산술연산자(사칙연산), 논리연산자(&&, ||, !), 비교연산자
+
+- [ map의 형태로 정보 관리 ] (key,value -> 접근 : map변수.get(key값) -> value 값 리턴 / 검색에 특화되어 있는 자료구조)
+- pageContext, 
+  pageScope, requestScope, sessionScope, applicationScope,
+  param : 쿼리스트링의 이름 값 
+  paramValues : 같은 이름으로 전달된 쿼리스트링 이름, 값
+  header : 요청정보 헤더
+  headerValues
+  cookie
+  initParam
+
+============
+
+1. 로그인 사용자 입력
+2. memberList ( 경로 )
+3. driver로딩 ( JDBCUtil / static method 등록 )
+4. VO 객체선언 
+5. DAO 구현 ( CRUD 메소드 선언 )
+6. DB연결 해제 (JDBCutil.java )
+7. controller 요청 캐치 ( 결과값 양수면 성공 -> redirect)

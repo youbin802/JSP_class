@@ -1,0 +1,15 @@
+< mvc패턴 >
+
+* model      -> app이 하는 것이 뭔지(백에서 처리) /data,DAO 포함 (class.java)
+	    -> 비즈니스 로직 = 서비스 로직 (알고리즘) 
+			     DAO 로직   (DB CRUD)
+			     DTO 로직    (VO)
+
+* view         -> 사용자 인터페이스 제공 (jsp페이지)
+* controller  -> 서블릿(뷰와 모델 사이, 중간역할) (servlet)
+
+ = 뷰에서 모델을 호출 (new 연산자) -> 결합도가 강하다.(좋은 소프투웨어가 아님)
+
+사용자 요청은 컨트롤러가 받음-> 모델이 실행 후 return -> view jsp 호출
+
+- frontController - 대표 controller => 다른 요청 controller로 둠

@@ -1,0 +1,14 @@
+서브컨트롤러 subController (Map<String, String> paramMap)
+
+1. 요청파라미터 정보를 가져와서 추출 : 
+	- 프론트컨트롤러 (request x Map(string, string) 전달)
+
+2. DB 연동 후 결과데이터를 모델에 저장 :
+	- request.setAttribute(data name, data ) x
+	- ModelView 객체에 결과 데이터 저장
+
+3. MyView (결과 jsp 이름) 리턴 : viewPath = "/memberList.jsp" (물리적인 이름, 절대경로)
+	- viewPath = "논리적인 이름" 리턴 => "memberList.jsp"
+	
+4. 뷰의 논리적인 이름 -> 물리적인 이름 변환
+	- 물리적인 이름 =  viewResolver (논리적 이름)

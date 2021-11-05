@@ -1,0 +1,82 @@
+※ EL : 표현언어 (Expression Language)
+
+- JSP 표현식(<%= %>)을 대신해서 JSP 값을 편리하게 출력하기 위해 제공됨
+- JSP 2.0에 추가된 기능
+
+  (1) EL에서 제공하는 기능
+            -	JSP의 네 가지 기본 객체가 제공하는 영역의 속성 사용
+            -	집합 객체에 대한 접근 방법 제공
+            -	수치 연산, 관계 연산, 논리 연산자 제공
+            -	표현 언어만의 기본 객체 제공
+             표기법 : ${ expr }
+
+- 기본(내장) 객체
+  1) pageScope : page 영역에 존재하는 객체 참조
+  2) requestScope : request 영역에 존재하는 객체 참조
+  3) sessionScope : session 영역에 존재하는 객체 참조
+  4) applicationScope : application 영역에 존재하는 객체 참조
+  5) param : 요청 파라미터 값을 얻어올 때 사용
+  6) paramValues : 요청 파라미터 값을 배열로 얻어올 때 사용
+  7) header : 헤더 정보 얻어올 때 사용
+  8) headerValues : 헤더 정보를 배열로 얻어올 때 사용
+  9) cookie : 쿠키 객체 참조
+ 10) initParam : 컨텍스트 초기화 파라미터
+ 11) pageContext : PageContext 객체 참조
+
+-----------------------------------------------------------------------------------------
+※ JSTL (JSP Standard Tag Library)  : http://tomcat.apache.org/taglibs/ 에서 다운로드
+                                                 MVN repository에서 검색
+
+
+   라이브러리                URI                            Prefix(접두어)      예시
+   -----------------------------------------------------------------------------------------------
+   Core(코어)       http://java.sun.com/jsp/jstl/core            c             <c:tagname..>
+   XML               http://java.sun.com/jsp/jstl/xml             x             <x:tagname..>
+   국제화            http://java.sun.com/jsp/jstl/fmt            fmt            <fmt:tgname..>
+   DB                 http://java.sun.com/jsp/jstl/sql              sql           <sql:tagname..>
+   함수(Function)  http://java.sun.com/jsp/jstl/functions      fn             fn:functionName(..)
+  ------------------------------------------------------------------------------------------------
+
+ <형식>
+(1)JSTL core
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   
+   변수설정 : <c:set var="변수명" value="설정값" scope="범위" />
+   제거 :     <c:remove var="변수명" scope="{page|request|session|application}" />
+   출력 :     <c:out var="변수명" value="출력값" />
+   반복 :     <c:forEach   items="객체명" begin="시작인덱스" end="끝인덱스"  step="증감식" var="변수명" varStatus="상태변수"></c:forEach>
+               <c:forTonkens items="" delims="구분자" begin="" end=""  step="" var="" varStatus=""> </c:forTonkens>
+   조건 :     <c:if test="조건" var="변수명" scope="범위"> </c:if>
+   선택 :     <c:choose>                                                            // 자바의 switch와 비슷한 역할 (조건문 처리)
+                    <c:when test="조건">내용</c:when>                     //만족할때
+                    <c:otherwise>내용</c:otherwise>                         //만족하지 않을때
+              </c:choose>
+   자원접근 : <c:import url="" var="변수명" scope="범위" varReader="입력스트림명" charEncoding="인코딩값"/>  //지정된 url을 태그가 사용된 JSP페이지에 출력
+   이동:      <c:redirect url="" />
+   url생성:   <c:url var="변수명" value="값" scope="범위" />         //value 속성값으로 URL 생성
+
+  [ex]
+    <c:set var="test" value="Hello JSTL!" />
+    <c:out value="${test}" />
+    <c:remove var="test" />
+    <c:if test="${6+3 == 9}"> 6 + 3 = 9이다. </c:if>
+    <c:forEach var="test" begin="1" end="10" step="2">
+           <b> ${test} </b>
+    </c:forEach>
+ 
+
+(3)JSTL fmt
+   <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+   한글처리 : <fmt:requestEncoding value="인코딩값"/>
+   다국어 페이지 사용시 언어 지정 : <fmt:setLocale value="값" variant="브라우저 스펙" scope="범위">
+   시간대 설정 : <fmt:timezone value="timeZone">         //지정한 지역값으로 시간대 맞춤
+ 
+
+
+(4)JSTL sql
+   <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+  
+   접속 : <sql:setDataSource url="" driver="" user="" password="" var="" scope=""/>
+   DML  : <sql:query sql="" dataSource="" var="" />  ==> select
+          <sql:update sql="" dataSource="" var=""/>  ==> inset,delete,update,create등
